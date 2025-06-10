@@ -1,3 +1,7 @@
+import com.google.gson.JsonObject
+import quest.toybox.template.Constants
+import quest.toybox.template.task.JsonProcessingReader
+
 plugins {
     id("template-shared")
 }
@@ -19,12 +23,12 @@ dependencies {
 }
 
 tasks {
-    "compileJava"(JavaCompile::class) {
+    compileJava {
         dependsOn(configurations["commonJava"])
         source(configurations["commonJava"])
     }
 
-    "compileKotlin"(KotlinCompile::class) {
+    compileKotlin {
         dependsOn(configurations["commonKotlin"])
         source(configurations["commonKotlin"])
     }
@@ -33,6 +37,26 @@ tasks {
         dependsOn(configurations["commonResources"])
         from(configurations["commonResources"]) {
             exclude("fabric.mod.json")
+        }
+
+        filesMatching(listOf("**/*.json", "**/*.mcmeta")) {
+            val processor: (JsonObject.() -> Unit)? = when (name) {
+                "fabric.mod.json" -> { ->
+                    val authors = getAsJsonArray("authors")
+                    val contributors = getAsJsonArray("contributors")
+
+                    for ((contributor, role) in Constants.CONTRIBUTORS) {
+                        if (role == "Project Owner") {
+                            authors.add(contributor)
+                        } else {
+                            contributors.add(contributor)
+                        }
+                    }
+                }
+                else -> null
+            }
+
+            filter(mapOf("processor" to processor), JsonProcessingReader::class.java)
         }
     }
 }
