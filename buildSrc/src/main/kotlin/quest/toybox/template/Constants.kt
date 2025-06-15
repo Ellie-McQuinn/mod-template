@@ -1,6 +1,10 @@
 package quest.toybox.template
 
+import org.codehaus.groovy.runtime.ProcessGroovyMethods
+import org.gradle.api.Project
+import org.gradle.api.provider.Provider
 import org.gradle.jvm.toolchain.JavaLanguageVersion
+import org.gradle.kotlin.dsl.support.uppercaseFirstChar
 
 object Constants {
     const val GROUP = "quest.toybox.template"
@@ -65,4 +69,33 @@ object Constants {
     const val NEOFORGE_VERSION = "21.1.159" // https://projects.neoforged.net/neoforged/neoforge/
     const val NEOFORGE_KOTLIN_VERSION = "5.8.0"
     const val FML_CONSTRAINT = "[4,)" // https://projects.neoforged.net/neoforged/fancymodloader/
+
+    fun getProjectName(project: Project): String {
+        return project.name.uppercaseFirstChar()
+    }
+
+    fun getModVersion(): String {
+        return if (MOD_VERSION.count { it == '.' } == 3) {
+            MOD_VERSION.substringAfter('.')
+        } else {
+            MOD_VERSION
+        }
+    }
+
+    fun getChangelog(project: Project): Provider<String> {
+        return project.providers.provider {
+            val compareTag = ProcessGroovyMethods.getText(ProcessGroovyMethods.execute("git describe --tags --abbrev=0")).trim()
+            val commitHash = ProcessGroovyMethods.getText(ProcessGroovyMethods.execute("git rev-parse HEAD")).trim()
+
+            buildString {
+                appendLine(project.rootDir.resolve("changelog.md").readText(Charsets.UTF_8).trimEnd())
+
+                if (compareTag.isNotBlank()) {
+                    appendLine()
+                    val url = "${COMPARE_URL}${compareTag.replace("+", "%2B")}...${commitHash}"
+                    appendLine("A detailed changelog can be found [here](<$url>).")
+                }
+            }
+        }
+    }
 }

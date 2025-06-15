@@ -47,3 +47,7 @@ loom {
 tasks.processResources {
     exclude("META-INF/accesstransformer.cfg")
 }
+
+publishMods {
+    file = tasks.remapJar.map { it.archiveFile.get() }
+}
