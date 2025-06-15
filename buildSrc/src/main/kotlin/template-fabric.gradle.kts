@@ -44,6 +44,13 @@ loom {
     }
 }
 
+fabricApi {
+    configureDataGeneration {
+        modId = Constants.MOD_ID
+        outputDirectory = file("src/generated/resources")
+    }
+}
+
 tasks.processResources {
     exclude("META-INF/accesstransformer.cfg")
 }

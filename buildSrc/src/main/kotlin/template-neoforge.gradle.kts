@@ -25,6 +25,22 @@ neoForge {
             ideName = "NeoForge Client"
         }
 
+        val common = findProject(":common")!!
+
+        create("commonData") {
+            data()
+            ideName = "Common Data"
+
+            programArguments.addAll(
+                "--mod", Constants.MOD_ID,
+                "--output", common.file("src/generated/resources").absolutePath,
+                "--existing", common.file("src/main/resources").absolutePath,
+                "--all"
+            )
+
+            systemProperty("template.datagen.common", "true")
+        }
+
         create("data") {
             data()
             ideName = "NeoForge Data"
@@ -32,7 +48,7 @@ neoForge {
             programArguments.addAll(
                 "--mod", Constants.MOD_ID,
                 "--output", file("src/generated/resources").absolutePath,
-                "--existing", findProject(":common")!!.file("src/main/resources").absolutePath,
+                "--existing", common.file("src/main/resources").absolutePath,
                 "--all"
             )
         }

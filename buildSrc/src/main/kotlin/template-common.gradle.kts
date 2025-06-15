@@ -21,6 +21,10 @@ dependencies {
     compileOnly(group = "thedarkcolour", name = "kotlinforforge-neoforge", version = Constants.NEOFORGE_KOTLIN_VERSION)
 }
 
+sourceSets.main {
+    resources.srcDirs("src/generated/resources")
+}
+
 configurations {
     consumable("commonJava")
     consumable("commonKotlin")
