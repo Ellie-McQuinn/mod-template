@@ -98,7 +98,7 @@ publishMods {
             minecraftVersions = listOf(Constants.MINECRAFT_VERSION)
             clientRequired = true
             serverRequired = true
-            javaVersions = listOf(JavaVersion.VERSION_21)
+            javaVersions = listOf(JavaVersion.toVersion(Constants.JAVA_VERSION.toString()))
 
             dependencies {
                 requires(*template.getDependencyIds(UploadTarget.CURSEFORGE, DependencyType.REQUIRED).toTypedArray())

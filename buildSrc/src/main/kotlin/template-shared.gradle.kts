@@ -17,12 +17,26 @@ version = Constants.MOD_VERSION
 
 base.archivesName = "${Constants.MOD_ID}-${project.name}-${Constants.MINECRAFT_VERSION}"
 
-java.toolchain.languageVersion = Constants.JAVA_VERSION
+java.toolchain {
+    languageVersion = Constants.JAVA_VERSION
+    vendor = JvmVendorSpec.MICROSOFT
+}
 
 kotlin {
     compilerOptions {
         jvmTarget = JvmTarget.JVM_21
         languageVersion = KotlinVersion.KOTLIN_2_1
+    }
+}
+
+dependencies {
+    compileOnly(group = "org.jetbrains", name = "annotations", version = Constants.JETBRAIN_ANNOTATIONS_VERSION)
+}
+
+tasks {
+    withType<JavaCompile>().configureEach {
+        options.release = Constants.JAVA_VERSION.asInt()
+        options.encoding = "UTF-8"
     }
 }
 
@@ -88,10 +102,6 @@ repositories {
             includeGroup("thedarkcolour")
         }
     }
-}
-
-dependencies {
-    compileOnly(group = "org.jetbrains", name = "annotations", version = Constants.JETBRAIN_ANNOTATIONS_VERSION)
 }
 
 tasks.jar {
