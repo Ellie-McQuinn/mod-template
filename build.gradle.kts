@@ -29,6 +29,17 @@ gradle.taskGraph.whenReady {
     }
 }
 
+publishMods {
+    Constants.githubProperties?.also { props ->
+        github {
+            accessToken = providers.environmentVariable(props.uploadToken)
+            repository = props.repo
+            commitish = "main-${Constants.MINECRAFT_VERSION}"
+            tagName = "${Constants.getModVersion()}+${Constants.MINECRAFT_VERSION}"
+        }
+    }
+}
+
 tasks.publishMods {
     doLast {
         val environmentVariable = providers.environmentVariable(Constants.PUBLISH_WEBHOOK_VARIABLE)

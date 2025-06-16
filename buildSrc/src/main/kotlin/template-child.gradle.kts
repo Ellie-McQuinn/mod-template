@@ -92,12 +92,12 @@ publishMods {
 
     Constants.curseforgeProperties?.also { props ->
         curseforge {
-            accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
+            accessToken = providers.environmentVariable(props.uploadToken)
             projectId = props.projectId
             projectSlug = props.projectSlug
             minecraftVersions = listOf(Constants.MINECRAFT_VERSION)
-            clientRequired = true
-            serverRequired = true
+            clientRequired = props.clientSideRequired
+            serverRequired = props.serverSideRequired
             javaVersions = listOf(JavaVersion.toVersion(Constants.JAVA_VERSION.toString()))
 
             dependencies {
@@ -109,7 +109,7 @@ publishMods {
 
     Constants.modrinthProperties?.also { props ->
         modrinth {
-            accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+            accessToken = providers.environmentVariable(props.uploadToken)
             projectId = props.projectId
             minecraftVersions = listOf(Constants.MINECRAFT_VERSION)
 
@@ -117,6 +117,14 @@ publishMods {
                 requires(*template.getDependencyIds(UploadTarget.MODRINTH, DependencyType.REQUIRED).toTypedArray())
                 optional(*template.getDependencyIds(UploadTarget.MODRINTH, DependencyType.OPTIONAL).toTypedArray())
             }
+        }
+    }
+
+    Constants.githubProperties?.also { props ->
+        github {
+            accessToken = providers.environmentVariable(props.uploadToken)
+
+            parent(rootProject.tasks.named("publishGithub"))
         }
     }
 }

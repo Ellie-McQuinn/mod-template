@@ -29,6 +29,11 @@ object Constants {
         override val projectId: String = "XXXXXXXX"
     }
 
+    val githubProperties: GithubProperties? = object : GithubProperties() {
+        override val repo: String = "EllieMcQuinn/mod-template"
+
+    }
+
     const val PUBLISH_WEBHOOK_VARIABLE = "PUBLISH_WEBHOOK"
 
     const val COMPARE_URL = "https://github.com/Ellie-McQuinn/mod-template/compare/"
