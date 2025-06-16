@@ -2,7 +2,6 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import quest.toybox.template.Constants
 import quest.toybox.template.extension.DependencyType
-import quest.toybox.template.extension.ModDependency
 import quest.toybox.template.extension.RepositoryExclusions
 import quest.toybox.template.extension.TemplateExtension
 import java.net.URI
@@ -167,9 +166,7 @@ tasks.processResources {
 // endregion
 
 // region Template Extension + Dep Management
-val templateExtension = extensions.create("template", TemplateExtension::class, project.objects.domainObjectContainer(ModDependency::class) { name ->
-    ModDependency(name, project.objects)
-})
+val templateExtension = extensions.create("template", TemplateExtension::class)
 
 project.afterEvaluate {
     val repositories: MutableMap<URI, RepositoryExclusions> = mutableMapOf()

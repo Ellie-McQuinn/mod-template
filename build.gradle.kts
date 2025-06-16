@@ -30,6 +30,8 @@ gradle.taskGraph.whenReady {
 }
 
 publishMods {
+    version = Constants.MOD_VERSION
+
     Constants.githubProperties?.also { props ->
         github {
             accessToken = providers.environmentVariable(props.uploadToken)
@@ -54,8 +56,7 @@ tasks.publishMods {
             listOf(project(":neoforge"), project(":fabric"))
         }.mapValues { (key, projects) ->
             projects.associateWith { it.tasks.getByName<PublishModTask>(key) }
-                .mapKeys { (project, task) -> Constants.getProjectName(project) }
-                .map { (project, task) -> "[${project}](<${PublishResult.fromJson(task.result.get().asFile.readText()).link}>)" }
+                .map { (project, task) -> "[${Constants.getProjectName(project)}](<${PublishResult.fromJson(task.result.get().asFile.readText()).link}>)" }
         }
 
         val payload = buildString {

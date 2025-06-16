@@ -1,8 +1,13 @@
 package quest.toybox.template.extension
 
 import org.gradle.api.NamedDomainObjectContainer
+import org.gradle.api.model.ObjectFactory
+import javax.inject.Inject
 
-abstract class TemplateExtension(val mods: NamedDomainObjectContainer<ModDependency>) {
+
+abstract class TemplateExtension @Inject constructor(factory: ObjectFactory) {
+    val mods: NamedDomainObjectContainer<ModDependency> = factory.domainObjectContainer(ModDependency::class.java)
+
     fun getDependencyIds(target: UploadTarget, type: DependencyType): Set<String> {
         return mods.filter { it.type.get() == type }.mapNotNull {
             when (target) {
