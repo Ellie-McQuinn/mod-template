@@ -90,12 +90,6 @@ tasks.publishMods {
     }
 }
 
-tasks.register("logVersion") {
-    doFirst {
-        println("mod-version=${Constants.getModVersion()}+${Constants.MINECRAFT_VERSION}")
-    }
-}
-
 idea {
     module {
         isDownloadSources = true
