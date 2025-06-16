@@ -9,4 +9,5 @@ abstract class CurseForgeProperties {
     open val serverSideRequired = true
     open val clientSideRequired = true
     open val supportedJavaVersions = listOf(JavaVersion.VERSION_21, JavaVersion.VERSION_22)
+    open val supportedMinecraftVersions = listOf(Constants.MINECRAFT_VERSION)
 }

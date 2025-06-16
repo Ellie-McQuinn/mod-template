@@ -31,7 +31,6 @@ object Constants {
 
     val githubProperties: GithubProperties? = object : GithubProperties() {
         override val repo: String = "EllieMcQuinn/mod-template"
-
     }
 
     const val PUBLISH_WEBHOOK_VARIABLE = "PUBLISH_WEBHOOK"
@@ -59,7 +58,6 @@ object Constants {
     const val MINECRAFT_VERSION = "1.21.1"
     const val FL_MINECRAFT_CONSTRAINT = "1.21.1"
     const val NF_MINECRAFT_CONSTRAINT = "[1.21.1]"
-    val SUPPORTED_MINECRAFT_VERSIONS = listOf(MINECRAFT_VERSION)
 
     // https://parchmentmc.org/docs/getting-started#choose-a-version/
     const val PARCHMENT_MINECRAFT = "1.21"

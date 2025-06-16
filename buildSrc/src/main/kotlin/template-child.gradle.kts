@@ -95,10 +95,10 @@ publishMods {
             accessToken = providers.environmentVariable(props.uploadToken)
             projectId = props.projectId
             projectSlug = props.projectSlug
-            minecraftVersions = listOf(Constants.MINECRAFT_VERSION)
             clientRequired = props.clientSideRequired
             serverRequired = props.serverSideRequired
-            javaVersions = listOf(JavaVersion.toVersion(Constants.JAVA_VERSION.toString()))
+            javaVersions = props.supportedJavaVersions
+            minecraftVersions = props.supportedMinecraftVersions
 
             dependencies {
                 requires(*template.getDependencyIds(UploadTarget.CURSEFORGE, DependencyType.REQUIRED).toTypedArray())
@@ -111,7 +111,7 @@ publishMods {
         modrinth {
             accessToken = providers.environmentVariable(props.uploadToken)
             projectId = props.projectId
-            minecraftVersions = listOf(Constants.MINECRAFT_VERSION)
+            minecraftVersions = props.supportedMinecraftVersions
 
             dependencies {
                 requires(*template.getDependencyIds(UploadTarget.MODRINTH, DependencyType.REQUIRED).toTypedArray())

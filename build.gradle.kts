@@ -34,8 +34,8 @@ publishMods {
         github {
             accessToken = providers.environmentVariable(props.uploadToken)
             repository = props.repo
-            commitish = "main-${Constants.MINECRAFT_VERSION}"
-            tagName = "${Constants.getModVersion()}+${Constants.MINECRAFT_VERSION}"
+            commitish = props.commitish
+            tagName = props.tag
         }
     }
 }
