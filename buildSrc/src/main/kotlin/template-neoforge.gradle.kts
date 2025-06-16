@@ -1,7 +1,7 @@
 import quest.toybox.template.Constants
 
 plugins {
-    id("template-child")
+    id("template-platform")
     id("net.neoforged.moddev")
 }
 
