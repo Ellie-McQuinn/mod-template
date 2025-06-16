@@ -53,21 +53,21 @@ object Constants {
     const val MIXIN_VERSION = "0.15.2+mixin.0.8.7"
     const val MIXIN_EXTRAS_VERSION = "0.4.1"
 
-    const val MINECRAFT_VERSION = "1.21.5"
-    const val FL_MINECRAFT_CONSTRAINT = ">=1.21.5"
-    const val NF_MINECRAFT_CONSTRAINT = "[1.21.5,)"
+    const val MINECRAFT_VERSION = "1.21.6"
+    const val FL_MINECRAFT_CONSTRAINT = ">=1.21.6"
+    const val NF_MINECRAFT_CONSTRAINT = "[1.21.6,)"
 
     // https://parchmentmc.org/docs/getting-started#choose-a-version/
-    const val PARCHMENT_MINECRAFT = "1.21.5"
-    const val PARCHMENT_RELEASE = "2025.06.15"
+    const val PARCHMENT_MINECRAFT = "1.21.6"
+    const val PARCHMENT_RELEASE = "2025.06.29"
 
     // https://fabricmc.net/develop/
-    const val FABRIC_API_VERSION = "0.127.0+1.21.5"
+    const val FABRIC_API_VERSION = "0.127.1+1.21.6"
     const val FABRIC_KOTLIN_VERSION = "1.13.3+kotlin.2.1.21"
     const val FABRIC_LOADER_VERSION = "0.16.14"
 
-    const val NEOFORM_VERSION = "1.21.5-20250325.162830" // // https://projects.neoforged.net/neoforged/neoform/
-    const val NEOFORGE_VERSION = "21.5.75" // https://projects.neoforged.net/neoforged/neoforge/
+    const val NEOFORM_VERSION = "1.21.6-20250617.151856" // // https://projects.neoforged.net/neoforged/neoform/
+    const val NEOFORGE_VERSION = "21.6.19-beta" // https://projects.neoforged.net/neoforged/neoforge/
     const val NEOFORGE_KOTLIN_VERSION = "5.9.0"
     const val FML_CONSTRAINT = "[4,)" // https://projects.neoforged.net/neoforged/fancymodloader/
 
