@@ -11,6 +11,7 @@ plugins {
     id("me.modmuss50.mod-publish-plugin")
 }
 
+// region Receive Code from Common ...
 evaluationDependsOn(":common")
 
 configurations {
@@ -40,32 +41,36 @@ tasks {
 
     processResources {
         dependsOn(configurations["commonResources"])
-        from(configurations["commonResources"]) {
-            exclude("fabric.mod.json")
-        }
-
-        filesMatching(listOf("**/*.json", "**/*.mcmeta")) {
-            val processor: (JsonObject.() -> Unit)? = when (name) {
-                "fabric.mod.json" -> { ->
-                    val authors = getAsJsonArray("authors")
-                    val contributors = getAsJsonArray("contributors")
-
-                    for ((contributor, role) in Constants.CONTRIBUTORS) {
-                        if (role == "Project Owner") {
-                            authors.add(contributor)
-                        } else {
-                            contributors.add(contributor)
-                        }
-                    }
-                }
-                else -> null
-            }
-
-            filter(mapOf("processor" to processor), JsonProcessingReader::class.java)
-        }
+        from(configurations["commonResources"])
     }
 }
+// endregion
 
+// region Minify Json + FMJ edits ...
+tasks.processResources {
+    filesMatching(listOf("**/*.json", "**/*.mcmeta")) {
+        val processor: (JsonObject.() -> Unit)? = when (name) {
+            "fabric.mod.json" -> { ->
+                val authors = getAsJsonArray("authors")
+                val contributors = getAsJsonArray("contributors")
+
+                for ((contributor, role) in Constants.CONTRIBUTORS) {
+                    if (role == "Project Owner") {
+                        authors.add(contributor)
+                    } else {
+                        contributors.add(contributor)
+                    }
+                }
+            }
+            else -> null
+        }
+
+        filter(mapOf("processor" to processor), JsonProcessingReader::class.java)
+    }
+}
+// endregion
+
+// region Mod Publishing ...
 fun getReleaseType(version: String): ReleaseType =
     if ("alpha" in version) { ReleaseType.ALPHA }
     else if ("beta" in version) { ReleaseType.BETA }
@@ -128,3 +133,4 @@ publishMods {
         }
     }
 }
+// endregion

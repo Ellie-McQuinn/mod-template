@@ -21,10 +21,13 @@ dependencies {
     compileOnly(group = "thedarkcolour", name = "kotlinforforge-neoforge", version = Constants.NEOFORGE_KOTLIN_VERSION)
 }
 
+// region Common Data Generation
 sourceSets.main {
     resources.srcDirs("src/generated/resources")
 }
+// endregion
 
+// region Share Code with SubProjects
 configurations {
     consumable("commonJava")
     consumable("commonKotlin")
@@ -40,3 +43,4 @@ afterEvaluate {
         }
     }
 }
+// endregion

@@ -40,6 +40,7 @@ tasks {
     }
 }
 
+// region Shared Repositories
 repositories {
     mavenCentral()
 
@@ -103,7 +104,9 @@ repositories {
         }
     }
 }
+// endregion
 
+// region Add Information to Jar
 tasks.jar {
     manifest {
         attributes(mapOf(
@@ -156,19 +159,22 @@ tasks.processResources {
     replacements.putAll(Constants.EXTRA_MOD_INFO_REPLACEMENTS)
 
     inputs.properties(replacements)
+
     filesMatching(listOf("fabric.mod.json", "META-INF/neoforge.mods.toml", "*.mixins.json", "*.mcmeta")) {
         expand(replacements)
     }
 }
+// endregion
 
-val multiLoaderExtension = extensions.create("template", TemplateExtension::class, project.objects.domainObjectContainer(ModDependency::class) { name ->
+// region Template Extension + Dep Management
+val templateExtension = extensions.create("template", TemplateExtension::class, project.objects.domainObjectContainer(ModDependency::class) { name ->
     ModDependency(name, project.objects)
 })
 
 project.afterEvaluate {
     val repositories: MutableMap<URI, RepositoryExclusions> = mutableMapOf()
 
-    for (mod in multiLoaderExtension.mods) {
+    for (mod in templateExtension.mods) {
         for (repository in mod.getRepositories()) {
             if (repository.key in repositories) {
                 repositories[repository.key]!!.groups.addAll(repository.value.groups)
@@ -207,7 +213,7 @@ project.afterEvaluate {
     }
 
     dependencies {
-        for (mod in multiLoaderExtension.mods) {
+        for (mod in templateExtension.mods) {
             mod.getArtifacts().forEach {
                 it.invoke(this, mod.type.get() == DependencyType.REQUIRED || mod.enabledAtRuntime.get())
             }
@@ -215,10 +221,11 @@ project.afterEvaluate {
     }
 
     sourceSets.main.configure {
-        val directories = multiLoaderExtension.mods.filter { it.type.get() != DependencyType.DISABLED }
+        val directories = templateExtension.mods.filter { it.type.get() != DependencyType.DISABLED }
             .map { it.sourceDirectory }
             .filter { project.file(it).exists() }
 
         java.srcDirs(directories)
     }
 }
+// endregion
