@@ -28,7 +28,7 @@ neoForge {
         val common = findProject(":common")!!
 
         create("commonData") {
-            data()
+            clientData()
             ideName = "Common Data (:neoforge)"
 
             programArguments.addAll(
@@ -42,7 +42,7 @@ neoForge {
         }
 
         create("data") {
-            data()
+            clientData()
             ideName = "NeoForge Data (:neoforge)"
 
             programArguments.addAll(
