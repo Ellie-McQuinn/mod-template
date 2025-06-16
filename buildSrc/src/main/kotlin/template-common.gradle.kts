@@ -1,7 +1,7 @@
 import quest.toybox.template.Constants
 
 plugins {
-    id("template-shared")
+    id("template-parent")
     id("net.neoforged.moddev")
 }
 
@@ -21,26 +21,6 @@ dependencies {
     compileOnly(group = "thedarkcolour", name = "kotlinforforge-neoforge", version = Constants.NEOFORGE_KOTLIN_VERSION)
 }
 
-// region Common Data Generation
 sourceSets.main {
     resources.srcDirs("src/generated/resources")
 }
-// endregion
-
-// region Share Code with SubProjects
-configurations {
-    consumable("commonJava")
-    consumable("commonKotlin")
-    consumable("commonResources")
-}
-
-afterEvaluate {
-    with(sourceSets.main.get()) {
-        artifacts {
-            java.sourceDirectories.forEach { add("commonJava", it) }
-            kotlin.sourceDirectories.forEach { add("commonKotlin", it) }
-            resources.sourceDirectories.forEach { add("commonResources", it) }
-        }
-    }
-}
-// endregion
