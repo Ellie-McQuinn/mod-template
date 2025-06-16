@@ -44,7 +44,7 @@ jobs:
           with:
             cache-write-only: ${{ github.event.inputs.ignoreCache }}
       -   name: publish mod
-          run: ./gradlew :publishMods
+          run: ./gradlew publishMods
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
