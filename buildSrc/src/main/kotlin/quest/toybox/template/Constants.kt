@@ -50,8 +50,8 @@ object Constants {
     val JAVA_VERSION = JavaLanguageVersion.of(21)
     const val JETBRAIN_ANNOTATIONS_VERSION = "26.0.2"
 
-    const val MIXIN_VERSION = "0.13.3+mixin.0.8.5"
-    const val MIXIN_EXTRAS_VERSION = "0.3.5"
+    const val MIXIN_VERSION = "0.15.2+mixin.0.8.7"
+    const val MIXIN_EXTRAS_VERSION = "0.4.1"
 
     const val MINECRAFT_VERSION = "1.21.5"
     const val FL_MINECRAFT_CONSTRAINT = ">=1.21.5"
