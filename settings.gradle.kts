@@ -15,7 +15,9 @@ include(
 )
 
 fun ProjectDescriptor.makeProjectDirectories() {
-    projectDir.mkdirs()
+    if (!projectDir.exists()) {
+        projectDir.mkdirs()
+    }
 
     for (descriptor in children) {
         descriptor.makeProjectDirectories()
