@@ -15,6 +15,13 @@ dependencies {
     })
 }
 
+fabricApi {
+    configureDataGeneration {
+        modId = Constants.MOD_ID
+        outputDirectory = file("src/generated/resources")
+    }
+}
+
 loom {
     val accessWidener = project(":common").file("src/main/resources/${Constants.MOD_ID}.accesswidener")
     if (accessWidener.exists()) {
@@ -41,13 +48,11 @@ loom {
             configName = "Fabric Server"
             isIdeConfigGenerated = true
         }
-    }
-}
 
-fabricApi {
-    configureDataGeneration {
-        modId = Constants.MOD_ID
-        outputDirectory = file("src/generated/resources")
+        named("datagen") {
+            configName = "Fabric Data"
+            isIdeConfigGenerated = true
+        }
     }
 }
 

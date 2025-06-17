@@ -22,14 +22,14 @@ neoForge {
 
         create("client") {
             client()
-            ideName = "NeoForge Client"
+            ideName = "NeoForge Client (:neoforge)"
         }
 
         val common = findProject(":common")!!
 
         create("commonData") {
             data()
-            ideName = "Common Data"
+            ideName = "Common Data (:neoforge)"
 
             programArguments.addAll(
                 "--mod", Constants.MOD_ID,
@@ -43,7 +43,7 @@ neoForge {
 
         create("data") {
             data()
-            ideName = "NeoForge Data"
+            ideName = "NeoForge Data (:neoforge)"
 
             programArguments.addAll(
                 "--mod", Constants.MOD_ID,
@@ -55,7 +55,7 @@ neoForge {
 
         create("server") {
             server()
-            ideName = "NeoForge Server"
+            ideName = "NeoForge Server (:neoforge)"
         }
     }
 
