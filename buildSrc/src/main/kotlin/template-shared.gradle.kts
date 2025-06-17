@@ -153,7 +153,7 @@ tasks.processResources {
 
         "fml_version_constraint" to Constants.FML_CONSTRAINT,
         "neoforge_version" to Constants.NEOFORGE_VERSION,
-        "neoforge_kotlin_Version" to Constants.NEOFORGE_KOTLIN_VERSION
+        "neoforge_kotlin_version" to Constants.NEOFORGE_KOTLIN_VERSION
     )
     replacements.putAll(Constants.EXTRA_MOD_INFO_REPLACEMENTS)
 
