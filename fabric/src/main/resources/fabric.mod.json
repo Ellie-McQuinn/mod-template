@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "depends": {
+    "fabricloader": ">=${fabric_loader_version}",
+    "minecraft": "${fl_minecraft_constraint}",
+    "fabric-api": ">=${fabric_api_version}",
+    "fabric-language-kotlin": ">=${fabric_kotlin_version}"
+  },
+  "entrypoints": {
+    "main": [
+      {
+        "value": "quest.toybox.template.FabricMain",
+        "adapter": "kotlin"
+      }
+    ],
+    "client": [
+      {
+        "value": "quest.toybox.template.FabricClient",
+        "adapter": "kotlin"
+      }
+    ]
+  },
+  "environment": "*",
+  "authors": [ ],
+  "contributors": [ ],
+  "accessWidener": "${mod_id}.accesswidener",
+  "mixins": [
+    "${mod_id}-common.mixins.json",
+    "${mod_id}-fabric.mixins.json"
+  ],
+  "contact": {
+    "homepage": "${homepage}",
+    "issues": "${issue_tracker}",
+    "sources": "${sources_url}"
+  },
+  "description": "${description}",
+  "icon": "${mod_id}.png",
+  "id": "${mod_id}",
+  "name": "${mod_name}",
+  "version": "${version}"
+}
