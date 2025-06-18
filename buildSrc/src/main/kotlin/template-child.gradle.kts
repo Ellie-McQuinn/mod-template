@@ -2,7 +2,6 @@ plugins {
     id("template-shared")
 }
 
-// region Receive Code from Common ...
 evaluationDependsOn(":common")
 
 configurations {
@@ -35,5 +34,3 @@ tasks {
         from(configurations["commonResources"])
     }
 }
-// endregion
-

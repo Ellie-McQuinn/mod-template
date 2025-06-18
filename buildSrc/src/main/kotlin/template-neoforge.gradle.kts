@@ -73,7 +73,3 @@ sourceSets.main {
 tasks.processResources {
     exclude("*.accesswidener")
 }
-
-publishMods {
-    file = tasks.jar.map { it.archiveFile.get() }
-}

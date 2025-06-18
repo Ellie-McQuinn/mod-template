@@ -18,13 +18,11 @@ object Constants {
     const val ISSUE_TRACKER = "https://github.com/Ellie-McQuinn/mod-template/issues"
     const val SOURCES_URL = "https://github.com/Ellie-McQuinn/mod-template"
 
-    @Suppress("RedundantNullableReturnType")
     val curseforgeProperties: CurseForgeProperties? = object : CurseForgeProperties() {
         override val projectId = "000000"
         override val projectSlug = "mod-template"
     }
 
-    @Suppress("RedundantNullableReturnType")
     val modrinthProperties: ModrinthProperties? = object : ModrinthProperties() {
         override val projectId: String = "XXXXXXXX"
     }
@@ -52,7 +50,7 @@ object Constants {
     val JAVA_VERSION = JavaLanguageVersion.of(21)
     const val JETBRAIN_ANNOTATIONS_VERSION = "26.0.2"
 
-    const val MIXIN_VERSION = "0.8.5"
+    const val MIXIN_VERSION = "0.13.3+mixin.0.8.5"
     const val MIXIN_EXTRAS_VERSION = "0.3.5"
 
     const val MINECRAFT_VERSION = "1.21.1"

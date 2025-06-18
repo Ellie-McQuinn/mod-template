@@ -15,7 +15,7 @@ neoForge {
 }
 
 dependencies {
-    compileOnly(group = "org.spongepowered", name = "mixin", version = Constants.MIXIN_VERSION)
+    compileOnly(group = "net.fabricmc", name = "sponge-mixin", version = Constants.MIXIN_VERSION)
     annotationProcessor(compileOnly(group = "io.github.llamalad7", name = "mixinextras-common", version = Constants.MIXIN_EXTRAS_VERSION))
 
     compileOnly(group = "thedarkcolour", name = "kotlinforforge-neoforge", version = Constants.NEOFORGE_KOTLIN_VERSION)

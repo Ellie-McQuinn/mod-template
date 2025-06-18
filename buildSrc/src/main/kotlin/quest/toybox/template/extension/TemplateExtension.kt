@@ -4,7 +4,6 @@ import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.model.ObjectFactory
 import javax.inject.Inject
 
-
 abstract class TemplateExtension @Inject constructor(factory: ObjectFactory) {
     val mods: NamedDomainObjectContainer<ModDependency> = factory.domainObjectContainer(ModDependency::class.java)
 
@@ -13,6 +12,7 @@ abstract class TemplateExtension @Inject constructor(factory: ObjectFactory) {
             when (target) {
                 UploadTarget.CURSEFORGE -> it.curseforgeName.orNull
                 UploadTarget.MODRINTH -> it.modrinthName.orNull
+                UploadTarget.GITHUB -> null
             }
         }.toSet()
     }
