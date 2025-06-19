@@ -27,16 +27,18 @@ tasks.wrapper {
 }
 
 gradle.taskGraph.whenReady {
-    if (!providers.environmentVariable("MULTILOADER_DRY_RUN").isPresent){
-        if (hasTask("publishMods") && !providers.environmentVariable("CI").isPresent) {
-            throw IllegalStateException("Cannot publish mods locally, please run the release workflow on GitHub.")
-        }
+    if (!boolean(providers.environmentVariable("MULTILOADER_DRY_RUN")).getOrElse(false)){
+        if (hasTask("publishMods")) {
+            val branch = ProcessGroovyMethods.getText(ProcessGroovyMethods.execute("git branch --show-current")).trim()
+            Constants.githubProperties?.also {
+                if (it.commitish != branch) {
+                    throw IllegalStateException("Cannot publish mods as you are trying to publish from the wrong branch, try again from: $branch")
+                }
+            }
 
-        val branch = ProcessGroovyMethods.getText(ProcessGroovyMethods.execute("git branch --show-current")).trim()
-        val githubProps = Constants.githubProperties ?: return@whenReady
-
-        if (branch != githubProps.commitish) {
-            throw IllegalStateException("Cannot publish mods as you are trying to publish from the wrong branch, try again from: $branch")
+            if (!providers.environmentVariable("CI").isPresent) {
+                throw IllegalStateException("Cannot publish mods locally, please run the release workflow on GitHub.")
+            }
         }
     }
 }
