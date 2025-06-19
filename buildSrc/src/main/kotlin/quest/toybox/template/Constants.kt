@@ -10,7 +10,7 @@ object Constants {
     const val GROUP = "quest.toybox.template"
     const val MOD_ID = "template"
     const val MOD_NAME = "Template Mod"
-    const val MOD_VERSION = "1.0.0"
+    const val MOD_VERSION = "2101.1.0.0"
     const val LICENSE = "MIT-0"
     const val DESCRIPTION = "A modern extensible modding template for all of our mods."
 

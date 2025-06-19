@@ -9,14 +9,16 @@ abstract class ModDependency(private val name: String) : Named {
     abstract val type: Property<DependencyType>
     abstract val curseforgeName: Property<String>
     abstract val modrinthName: Property<String>
-    abstract val sourceDirectory: Property<Any>
+    abstract val javaDirectory: Property<Any>
+    abstract val kotlinDirectory: Property<Any>
     abstract val enabledAtRuntime: Property<Boolean>
 
     init {
         type.convention(DependencyType.OPTIONAL)
         curseforgeName.convention(name)
         modrinthName.convention(name)
-        sourceDirectory.convention("src/main/${name.replace("-", "_")}")
+        javaDirectory.convention("src/main/${name.replace("-", "_")}Java")
+        kotlinDirectory.convention("src/main/${name.replace("-", "_")}Kotlin")
         enabledAtRuntime.convention(false)
     }
 
