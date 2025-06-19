@@ -28,7 +28,7 @@ tasks.wrapper {
 
 gradle.taskGraph.whenReady {
     if (!boolean(providers.environmentVariable("MULTILOADER_DRY_RUN")).getOrElse(false)){
-        if (hasTask("publishMods")) {
+        if (hasTask(":publishMods")) {
             if (!providers.environmentVariable("CI").isPresent) {
                 throw IllegalStateException("Cannot publish mods locally, please run the release workflow on GitHub.")
             }
