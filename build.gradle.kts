@@ -34,6 +34,17 @@ gradle.taskGraph.whenReady {
             }
 
             val branch = ProcessGroovyMethods.getText(ProcessGroovyMethods.execute("git branch --show-current")).trim()
+
+            println("CURRENT BRANCH: $branch")
+            println("CURRENT BRANCH: $branch")
+            println("CURRENT BRANCH: $branch")
+            println("CURRENT BRANCH: $branch")
+            println("CURRENT BRANCH: $branch")
+            println("CURRENT BRANCH: $branch")
+            println("CURRENT BRANCH: $branch")
+            println("CURRENT BRANCH: $branch")
+            println("CURRENT BRANCH: $branch")
+
             Constants.githubProperties?.also {
                 if (it.commitish != branch) {
                     throw IllegalStateException("Cannot publish mods as you are trying to publish from the wrong branch, try again from: $branch")
