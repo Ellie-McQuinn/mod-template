@@ -1,6 +1,7 @@
 import me.modmuss50.mpp.PublishModTask
 import me.modmuss50.mpp.PublishResult
 import me.modmuss50.mpp.ReleaseType
+import org.codehaus.groovy.runtime.ProcessGroovyMethods
 import quest.toybox.template.templateExt
 import quest.toybox.template.Constants
 import quest.toybox.template.extension.DependencyType
@@ -29,6 +30,13 @@ gradle.taskGraph.whenReady {
     if (!providers.environmentVariable("MULTILOADER_DRY_RUN").isPresent){
         if (hasTask("publishMods") && !providers.environmentVariable("CI").isPresent) {
             throw IllegalStateException("Cannot publish mods locally, please run the release workflow on GitHub.")
+        }
+
+        val branch = ProcessGroovyMethods.getText(ProcessGroovyMethods.execute("git branch --show-current")).trim()
+        val githubProps = Constants.githubProperties ?: return@whenReady
+
+        if (branch != githubProps.commitish) {
+            throw IllegalStateException("Cannot publish mods as you are trying to publish from the wrong branch, try again from: $branch")
         }
     }
 }

@@ -37,6 +37,10 @@ tasks {
         options.release = Constants.JAVA_VERSION.asInt()
         options.encoding = "UTF-8"
     }
+
+    jar {
+        archiveVersion = Constants.getModVersion()
+    }
 }
 
 // region Shared Repositories
@@ -218,11 +222,10 @@ project.afterEvaluate {
     }
 
     sourceSets.main.configure {
-        val directories = templateExtension.mods.filter { it.type.get() != DependencyType.DISABLED }
-            .map { it.sourceDirectory }
-            .filter { project.file(it).exists() }
+        val enabledMods = templateExtension.mods.filter { it.type.get() != DependencyType.DISABLED }
 
-        java.srcDirs(directories)
+        java.srcDirs(enabledMods.map { it.javaDirectory }.filter { project.file(it).exists() })
+        kotlin.srcDirs(enabledMods.map { it.kotlinDirectory }.filter { project.file(it).exists() })
     }
 }
 // endregion

@@ -56,6 +56,12 @@ loom {
     }
 }
 
-tasks.processResources {
-    exclude("META-INF/accesstransformer.cfg")
+tasks {
+    processResources {
+        exclude("META-INF/accesstransformer.cfg")
+    }
+
+    remapJar {
+        archiveVersion = Constants.getModVersion()
+    }
 }
