@@ -39,7 +39,7 @@ kotlin {
 
 dependencies {
     // // https://projects.neoforged.net/neoforged/moddevgradle/
-    implementation(group = "net.neoforged", name = "moddev-gradle", version = "2.0.91")
+    implementation(group = "net.neoforged", name = "moddev-gradle", version = "2.0.95")
     // https://maven.fabricmc.net/net/fabricmc/fabric-loom/
     implementation(group = "net.fabricmc", name = "fabric-loom", version = "1.10.5")
     // https://plugins.gradle.org/plugin/me.modmuss50.mod-publish-plugin
