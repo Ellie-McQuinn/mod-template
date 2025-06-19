@@ -29,15 +29,15 @@ tasks.wrapper {
 gradle.taskGraph.whenReady {
     if (!boolean(providers.environmentVariable("MULTILOADER_DRY_RUN")).getOrElse(false)){
         if (hasTask("publishMods")) {
+            if (!providers.environmentVariable("CI").isPresent) {
+                throw IllegalStateException("Cannot publish mods locally, please run the release workflow on GitHub.")
+            }
+
             val branch = ProcessGroovyMethods.getText(ProcessGroovyMethods.execute("git branch --show-current")).trim()
             Constants.githubProperties?.also {
                 if (it.commitish != branch) {
                     throw IllegalStateException("Cannot publish mods as you are trying to publish from the wrong branch, try again from: $branch")
                 }
-            }
-
-            if (!providers.environmentVariable("CI").isPresent) {
-                throw IllegalStateException("Cannot publish mods locally, please run the release workflow on GitHub.")
             }
         }
     }
