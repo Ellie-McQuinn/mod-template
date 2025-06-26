@@ -54,8 +54,8 @@ object Constants {
     const val MIXIN_EXTRAS_VERSION = "0.3.5"
 
     const val MINECRAFT_VERSION = "1.21.1"
-    const val FL_MINECRAFT_CONSTRAINT = "1.21.1"
-    const val NF_MINECRAFT_CONSTRAINT = "[1.21.1]"
+    const val FL_MINECRAFT_CONSTRAINT = ">=1.21.1"
+    const val NF_MINECRAFT_CONSTRAINT = "[1.21.1,)"
 
     // https://parchmentmc.org/docs/getting-started#choose-a-version/
     const val PARCHMENT_MINECRAFT = "1.21.1"
