@@ -16,7 +16,7 @@ repositories {
             }
         }
         filter {
-            includeGroup("net.fabricmc")
+            includeGroupAndSubgroups("net.fabricmc")
         }
     }
 }
@@ -38,10 +38,10 @@ kotlin {
 }
 
 dependencies {
-    // // https://projects.neoforged.net/neoforged/moddevgradle/
-    implementation(group = "net.neoforged", name = "moddev-gradle", version = "2.0.91")
+    // https://projects.neoforged.net/neoforged/moddevgradle/
+    implementation(group = "net.neoforged", name = "moddev-gradle", version = "2.0.95")
     // https://maven.fabricmc.net/net/fabricmc/fabric-loom/
-    implementation(group = "net.fabricmc", name = "fabric-loom", version = "1.10.5")
+    implementation(group = "net.fabricmc", name = "fabric-loom", version = "1.11.1")
     // https://plugins.gradle.org/plugin/me.modmuss50.mod-publish-plugin
     implementation(group = "me.modmuss50.mod-publish-plugin", name = "me.modmuss50.mod-publish-plugin.gradle.plugin", version = "0.8.4")
     // https://mvnrepository.com/artifact/com.google.code.gson/gson

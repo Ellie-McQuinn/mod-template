@@ -14,7 +14,7 @@ object Constants {
     const val LICENSE = "MIT-0"
     const val DESCRIPTION = "A modern extensible modding template for all of our mods."
 
-    const val HOMEPAGE = "https://www.curseforge.com/minecraft/mc-mods/mod-template"
+    const val HOMEPAGE = "https://modrinth.com/mod/mod-template"
     const val ISSUE_TRACKER = "https://github.com/Ellie-McQuinn/mod-template/issues"
     const val SOURCES_URL = "https://github.com/Ellie-McQuinn/mod-template"
 
