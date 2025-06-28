@@ -150,6 +150,8 @@ publishMods {
 }
 
 tasks.publishMods {
+    notCompatibleWithConfigurationCache("Gets information at execution time, todo!!!")
+
     doLast {
         val environmentVariable = providers.environmentVariable(Constants.PUBLISH_WEBHOOK_VARIABLE)
 
