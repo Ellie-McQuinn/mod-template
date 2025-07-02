@@ -1,5 +1,6 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+import quest.toybox.sculptor.minecraft.MCVersions
 import quest.toybox.template.Constants
 import quest.toybox.template.extension.DependencyType
 import quest.toybox.template.extension.RepositoryExclusions
@@ -9,36 +10,24 @@ import java.net.URI
 plugins {
     `java-library`
     kotlin("jvm")
-    id("quest.toybox.sculptor-main")
+    id("quest.toybox.sculptor-shared")
+}
+
+sculptor {
+    minecraftVersion = MCVersions.MC_1_21_1
+    parchmentArtifact = "1.21.1:2024.11.17" // https://parchmentmc.org/docs/getting-started#choose-a-version/
 }
 
 group = Constants.GROUP
 version = Constants.MOD_VERSION
 
-base.archivesName = "${Constants.MOD_ID}-${project.name}-${Constants.MINECRAFT_VERSION}"
-
-java.toolchain {
-    languageVersion = Constants.JAVA_VERSION
-    vendor = JvmVendorSpec.MICROSOFT
-}
-
-kotlin {
-    compilerOptions {
-        jvmTarget = JvmTarget.JVM_21
-        languageVersion = KotlinVersion.KOTLIN_2_1
-    }
-}
+base.archivesName = sculptor.minecraftVersion.map { "${Constants.MOD_ID}-${project.name}-${it}" }
 
 dependencies {
     compileOnly(group = "org.jetbrains", name = "annotations", version = Constants.JETBRAIN_ANNOTATIONS_VERSION)
 }
 
 tasks {
-    withType<JavaCompile>().configureEach {
-        options.release = Constants.JAVA_VERSION.asInt()
-        options.encoding = "UTF-8"
-    }
-
     jar {
         archiveVersion = Constants.getModVersion()
     }
@@ -111,7 +100,7 @@ repositories {
 // endregion
 
 // region Add Information to Jar
-tasks.jar {
+tasks.jar.configure {
     manifest {
         attributes(mapOf(
             "Specification-Title" to Constants.MOD_NAME,
@@ -120,7 +109,7 @@ tasks.jar {
             "Implementation-Title" to project.name,
             "Implementation-Version" to archiveVersion,
             "Implementation-Vendor" to Constants.CONTRIBUTORS.firstEntry().key,
-            "Built-On-Minecraft" to Constants.MINECRAFT_VERSION.version
+            "Built-On-Minecraft" to sculptor.minecraftVersion.get()
         ))
     }
 
@@ -147,8 +136,8 @@ tasks.processResources {
         "issue_tracker" to Constants.ISSUE_TRACKER,
         "sources_url" to Constants.SOURCES_URL,
 
-        "java_version" to Constants.JAVA_VERSION.asInt(),
-        "minecraft_version" to Constants.MINECRAFT_VERSION.version,
+        "java_version" to sculptor.javaVersion.get().toString(),
+        "minecraft_version" to sculptor.minecraftVersion.get(),
         "fl_minecraft_constraint" to Constants.FL_MINECRAFT_CONSTRAINT,
         "nf_minecraft_constraint" to Constants.NF_MINECRAFT_CONSTRAINT,
 

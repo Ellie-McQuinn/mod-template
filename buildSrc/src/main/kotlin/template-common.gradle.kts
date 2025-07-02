@@ -2,16 +2,7 @@ import quest.toybox.template.Constants
 
 plugins {
     id("template-parent")
-    id("net.neoforged.moddev")
-}
-
-neoForge {
-    neoFormVersion = Constants.NEOFORM_VERSION
-
-    parchment {
-        minecraftVersion = Constants.PARCHMENT_MINECRAFT
-        mappingsVersion = Constants.PARCHMENT_RELEASE
-    }
+    id("quest.toybox.sculptor-common")
 }
 
 dependencies {

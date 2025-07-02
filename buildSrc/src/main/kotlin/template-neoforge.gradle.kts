@@ -2,18 +2,13 @@ import quest.toybox.template.Constants
 
 plugins {
     id("template-platform")
-    id("net.neoforged.moddev")
+    id("quest.toybox.sculptor-neoforge")
 }
 
 neoForge {
     version = Constants.NEOFORGE_VERSION
 
     accessTransformers.from(project(":common").neoForge.accessTransformers.files)
-
-    parchment {
-        minecraftVersion = Constants.PARCHMENT_MINECRAFT
-        mappingsVersion = Constants.PARCHMENT_RELEASE
-    }
 
     runs {
         configureEach {
@@ -28,7 +23,7 @@ neoForge {
         val common = findProject(":common")!!
 
         create("commonData") {
-            if (Constants.MINECRAFT_VERSION.hasSplitDatagens()) {
+            if (sculptor.minecraftVersion.get().hasSplitDatagens()) {
                 clientData()
             } else {
                 data()
@@ -47,12 +42,12 @@ neoForge {
         }
 
         create("data") {
-            if (Constants.MINECRAFT_VERSION.hasSplitDatagens()) {
+            if (sculptor.minecraftVersion.get().hasSplitDatagens()) {
                 clientData()
             } else {
                 data()
             }
-            
+
             ideName = "NeoForge Data (:neoforge)"
 
             programArguments.addAll(

@@ -3,17 +3,10 @@ import quest.toybox.template.Constants
 plugins {
     id("template-platform")
     id("fabric-loom")
+    id("quest.toybox.sculptor-fabric")
 }
 
 dependencies {
-    minecraft("com.mojang:minecraft:${Constants.MINECRAFT_VERSION}")
-
-    @Suppress("UnstableApiUsage")
-    mappings(loom.layered {
-        officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-${Constants.PARCHMENT_MINECRAFT}:${Constants.PARCHMENT_RELEASE}@zip")
-    })
-
     modImplementation("net.fabricmc:fabric-loader:${Constants.FABRIC_LOADER_VERSION}")
 }
 

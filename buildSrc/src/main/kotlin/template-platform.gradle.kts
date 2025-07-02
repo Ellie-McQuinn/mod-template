@@ -5,6 +5,7 @@ import quest.toybox.template.task.JsonProcessingReader
 // Signifies a Project that will be released to users, e.g. Fabric and NeoForge sub projects.
 
 plugins {
+    id("template-shared")
     id("template-child")
 }
 
