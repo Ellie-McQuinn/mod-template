@@ -28,7 +28,12 @@ neoForge {
         val common = findProject(":common")!!
 
         create("commonData") {
-            data()
+            if (Constants.MINECRAFT_VERSION.hasSplitDatagens()) {
+                clientData()
+            } else {
+                data()
+            }
+
             ideName = "Common Data (:neoforge)"
 
             programArguments.addAll(
@@ -42,7 +47,12 @@ neoForge {
         }
 
         create("data") {
-            data()
+            if (Constants.MINECRAFT_VERSION.hasSplitDatagens()) {
+                clientData()
+            } else {
+                data()
+            }
+            
             ideName = "NeoForge Data (:neoforge)"
 
             programArguments.addAll(

@@ -5,6 +5,7 @@ import org.gradle.api.Project
 import org.gradle.api.provider.Provider
 import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.gradle.kotlin.dsl.support.uppercaseFirstChar
+import quest.toybox.sculptor.minecraft.MCVersions
 
 object Constants {
     const val GROUP = "quest.toybox.template"
@@ -17,6 +18,8 @@ object Constants {
     const val HOMEPAGE = "https://modrinth.com/mod/mod-template"
     const val ISSUE_TRACKER = "https://github.com/Ellie-McQuinn/mod-template/issues"
     const val SOURCES_URL = "https://github.com/Ellie-McQuinn/mod-template"
+
+    val MINECRAFT_VERSION = MCVersions.MC_1_21_1
 
     val curseforgeProperties: CurseForgeProperties? = object : CurseForgeProperties() {
         override val projectId = "000000"
@@ -53,7 +56,6 @@ object Constants {
     const val MIXIN_VERSION = "0.13.3+mixin.0.8.5"
     const val MIXIN_EXTRAS_VERSION = "0.3.5"
 
-    const val MINECRAFT_VERSION = "1.21.1"
     const val FL_MINECRAFT_CONSTRAINT = ">=1.21.1"
     const val NF_MINECRAFT_CONSTRAINT = "[1.21.1,)"
 

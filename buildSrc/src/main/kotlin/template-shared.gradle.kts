@@ -9,6 +9,7 @@ import java.net.URI
 plugins {
     `java-library`
     kotlin("jvm")
+    id("quest.toybox.sculptor-main")
 }
 
 group = Constants.GROUP
@@ -119,7 +120,7 @@ tasks.jar {
             "Implementation-Title" to project.name,
             "Implementation-Version" to archiveVersion,
             "Implementation-Vendor" to Constants.CONTRIBUTORS.firstEntry().key,
-            "Built-On-Minecraft" to Constants.MINECRAFT_VERSION
+            "Built-On-Minecraft" to Constants.MINECRAFT_VERSION.version
         ))
     }
 
@@ -147,7 +148,7 @@ tasks.processResources {
         "sources_url" to Constants.SOURCES_URL,
 
         "java_version" to Constants.JAVA_VERSION.asInt(),
-        "minecraft_version" to Constants.MINECRAFT_VERSION,
+        "minecraft_version" to Constants.MINECRAFT_VERSION.version,
         "fl_minecraft_constraint" to Constants.FL_MINECRAFT_CONSTRAINT,
         "nf_minecraft_constraint" to Constants.NF_MINECRAFT_CONSTRAINT,
 

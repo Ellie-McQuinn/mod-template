@@ -7,6 +7,7 @@ plugins {
 repositories {
     gradlePluginPortal()
     mavenCentral()
+    mavenLocal()
 
     exclusiveContent {
         forRepository {
@@ -48,4 +49,5 @@ dependencies {
     implementation(group = "com.google.code.gson", name = "gson", version = "2.13.1")
     // https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin
     implementation(group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version = "2.1.0")
+    implementation(group = "quest.toybox.sculptor-main", name = "quest.toybox.sculptor-main.gradle.plugin", version = "0.0.3")
 }
