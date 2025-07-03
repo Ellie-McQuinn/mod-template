@@ -1,3 +1,4 @@
+import quest.toybox.sculptor.extension.FeatureKey
 import quest.toybox.template.Constants
 
 plugins {
@@ -12,6 +13,6 @@ dependencies {
     compileOnly(group = "thedarkcolour", name = "kotlinforforge-neoforge", version = Constants.NEOFORGE_KOTLIN_VERSION)
 }
 
-sourceSets.main {
-    resources.srcDirs("src/generated/resources")
+sculptor {
+    flag(FeatureKey.DATA_GENERATION, Unit)
 }

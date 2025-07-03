@@ -50,5 +50,5 @@ dependencies {
     // https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin
     implementation(group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version = "2.1.0")
 
-    implementation(group = "quest.toybox.sculptor-shared", name = "quest.toybox.sculptor-shared.gradle.plugin", version = "0.0.6")
+    implementation(group = "quest.toybox.sculptor-shared", name = "quest.toybox.sculptor-shared.gradle.plugin", version = "0.0.9")
 }

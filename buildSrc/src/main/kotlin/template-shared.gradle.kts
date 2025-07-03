@@ -1,5 +1,5 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+import quest.toybox.sculptor.extension.FeatureKey
 import quest.toybox.sculptor.minecraft.MCVersions
 import quest.toybox.template.Constants
 import quest.toybox.template.extension.DependencyType
@@ -14,14 +14,15 @@ plugins {
 }
 
 sculptor {
-    minecraftVersion = MCVersions.MC_1_21_1
-    parchmentArtifact = "1.21.1:2024.11.17" // https://parchmentmc.org/docs/getting-started#choose-a-version/
+    flag(FeatureKey.MINECRAFT, MCVersions.MC_1_21_1)
+    flag(FeatureKey.PARCHMENT, "1.21.1:2024.11.17")
+    flag(FeatureKey.KOTLIN, KotlinVersion.KOTLIN_2_1)
 }
 
 group = Constants.GROUP
 version = Constants.MOD_VERSION
 
-base.archivesName = sculptor.minecraftVersion.map { "${Constants.MOD_ID}-${project.name}-${it}" }
+base.archivesName = sculptor.get(FeatureKey.MINECRAFT).map { "${Constants.MOD_ID}-${project.name}-${it}" }
 
 dependencies {
     compileOnly(group = "org.jetbrains", name = "annotations", version = Constants.JETBRAIN_ANNOTATIONS_VERSION)
@@ -109,7 +110,7 @@ tasks.jar.configure {
             "Implementation-Title" to project.name,
             "Implementation-Version" to archiveVersion,
             "Implementation-Vendor" to Constants.CONTRIBUTORS.firstEntry().key,
-            "Built-On-Minecraft" to sculptor.minecraftVersion.get()
+            "Built-On-Minecraft" to sculptor.get(FeatureKey.MINECRAFT).get()
         ))
     }
 
@@ -136,8 +137,8 @@ tasks.processResources {
         "issue_tracker" to Constants.ISSUE_TRACKER,
         "sources_url" to Constants.SOURCES_URL,
 
-        "java_version" to sculptor.javaVersion.get().toString(),
-        "minecraft_version" to sculptor.minecraftVersion.get(),
+        "java_version" to sculptor.getJavaVersion().get().toString(),
+        "minecraft_version" to sculptor.get(FeatureKey.MINECRAFT).get(),
         "fl_minecraft_constraint" to Constants.FL_MINECRAFT_CONSTRAINT,
         "nf_minecraft_constraint" to Constants.NF_MINECRAFT_CONSTRAINT,
 

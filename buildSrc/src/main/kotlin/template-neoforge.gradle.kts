@@ -1,3 +1,4 @@
+import quest.toybox.sculptor.extension.FeatureKey
 import quest.toybox.template.Constants
 
 plugins {
@@ -23,7 +24,7 @@ neoForge {
         val common = findProject(":common")!!
 
         create("commonData") {
-            if (sculptor.minecraftVersion.get().hasSplitDatagens()) {
+            if (sculptor.get(FeatureKey.MINECRAFT).map { it.hasSplitDatagens() }.get()) {
                 clientData()
             } else {
                 data()
@@ -42,7 +43,7 @@ neoForge {
         }
 
         create("data") {
-            if (sculptor.minecraftVersion.get().hasSplitDatagens()) {
+            if (sculptor.get(FeatureKey.MINECRAFT).map { it.hasSplitDatagens() }.get()) {
                 clientData()
             } else {
                 data()
